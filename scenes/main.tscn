@@ -1,0 +1,128 @@
+[gd_scene load_steps=15 format=3 uid="uid://dt6cmeybyb7oq"]
+
+[ext_resource type="Script" path="res://scripts/contvida.gd" id="1_3fssq"]
+[ext_resource type="Script" path="res://scripts/ship.gd" id="1_5yes5"]
+[ext_resource type="FontFile" uid="uid://crko3d01veblg" path="res://assets/font/visitor1.ttf" id="1_x6puo"]
+[ext_resource type="Texture2D" uid="uid://crf0xvt0e5rcj" path="res://Ship5/Exhaust/Normal_flight/Exhaust1/exhaust04.png" id="2_askv7"]
+[ext_resource type="Texture2D" uid="uid://dee8r07efg2gj" path="res://assets/ground2.png" id="3_fsf12"]
+[ext_resource type="AudioStream" uid="uid://c3knc7xxdi3tp" path="res://assets/sound/efx_shot.mp3" id="3_jf6sy"]
+[ext_resource type="Script" path="res://scripts/labeltiro.gd" id="3_oxp7m"]
+[ext_resource type="Texture2D" uid="uid://bvfpwrt41kntx" path="res://assets/life.png" id="3_uau0x"]
+[ext_resource type="Script" path="res://scripts/labelscore.gd" id="4_apxaq"]
+[ext_resource type="Texture2D" uid="uid://cum5khv3jtce1" path="res://assets/ground.png" id="4_i7l3u"]
+[ext_resource type="Script" path="res://scripts/inimigoauto.gd" id="5_lswm1"]
+[ext_resource type="PackedScene" uid="uid://cnl6qad5cys5y" path="res://scenes/nave.tscn" id="8_7to3i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n4weu"]
+line_spacing = 1.0
+font = ExtResource("1_x6puo")
+font_size = 66
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1ogl"]
+size = Vector2(118, 71)
+
+[node name="main" type="Node2D"]
+position = Vector2(0, -1)
+
+[node name="info" type="CanvasLayer" parent="."]
+
+[node name="vida" type="Node2D" parent="info"]
+position = Vector2(0, -1)
+script = ExtResource("1_3fssq")
+
+[node name="vidaicon" type="TextureRect" parent="info/vida"]
+offset_left = 34.0
+offset_top = 72.0
+offset_right = 382.0
+offset_bottom = 420.0
+scale = Vector2(0.20559, 0.23708)
+texture = ExtResource("3_uau0x")
+
+[node name="vidaicon2" type="TextureRect" parent="info/vida"]
+offset_left = 91.0
+offset_top = 72.0
+offset_right = 439.0
+offset_bottom = 420.0
+scale = Vector2(0.20559, 0.23708)
+texture = ExtResource("3_uau0x")
+
+[node name="vidaicon3" type="TextureRect" parent="info/vida"]
+offset_left = 149.0
+offset_top = 72.0
+offset_right = 497.0
+offset_bottom = 420.0
+scale = Vector2(0.20559, 0.23708)
+texture = ExtResource("3_uau0x")
+
+[node name="labeltiro" type="Label" parent="info"]
+modulate = Color(0, 0, 0, 1)
+offset_left = 551.0
+offset_top = 80.0
+offset_right = 679.0
+offset_bottom = 141.0
+text = "0 2"
+label_settings = SubResource("LabelSettings_n4weu")
+script = ExtResource("3_oxp7m")
+
+[node name="labelscore" type="Label" parent="info"]
+modulate = Color(0, 0, 0, 1)
+offset_left = 988.0
+offset_top = 78.0
+offset_right = 1127.0
+offset_bottom = 139.0
+text = "0123"
+label_settings = SubResource("LabelSettings_n4weu")
+script = ExtResource("4_apxaq")
+
+[node name="Sprite2D" type="Sprite2D" parent="info"]
+position = Vector2(468, 110)
+scale = Vector2(2.90625, 3.0825)
+texture = ExtResource("2_askv7")
+
+[node name="fundo" type="ColorRect" parent="."]
+offset_top = 29.0
+offset_right = 1727.0
+offset_bottom = 673.0
+color = Color(0.6, 1, 1, 1)
+
+[node name="ship" type="Node2D" parent="."]
+position = Vector2(178, 341)
+script = ExtResource("1_5yes5")
+metadata/_edit_group_ = true
+
+[node name="nave" parent="ship" instance=ExtResource("8_7to3i")]
+position = Vector2(-83, -3)
+metadata/_edit_group_ = true
+
+[node name="somtiro" type="AudioStreamPlayer" parent="ship"]
+stream = ExtResource("3_jf6sy")
+
+[node name="colisaonave" type="Area2D" parent="ship"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ship/colisaonave"]
+position = Vector2(-85, -3)
+shape = SubResource("RectangleShape2D_b1ogl")
+
+[node name="topoc" type="TextureRect" parent="."]
+offset_top = -109.0
+offset_right = 1728.0
+offset_bottom = 59.0
+texture = ExtResource("3_fsf12")
+
+[node name="topob" type="TextureRect" parent="topoc"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 700.0
+offset_right = 1727.0
+offset_bottom = 868.0
+texture = ExtResource("4_i7l3u")
+
+[node name="inimigoauto" type="Node2D" parent="."]
+script = ExtResource("5_lswm1")
+
+[node name="Timer" type="Timer" parent="inimigoauto"]
+one_shot = true
+
+[connection signal="area_entered" from="ship/colisaonave" to="info/vida" method="_colisaonave_area_entered"]
+[connection signal="timeout" from="inimigoauto/Timer" to="inimigoauto" method="_on_timer_timeout"]

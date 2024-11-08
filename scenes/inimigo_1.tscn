@@ -1,0 +1,85 @@
+[gd_scene load_steps=15 format=3 uid="uid://2j8wkx0yaxie"]
+
+[ext_resource type="Script" path="res://scripts/inimigo_1.gd" id="1_5haim"]
+[ext_resource type="Texture2D" uid="uid://du4xpfitkmfk7" path="res://assets/dead.png" id="2_g3nbg"]
+[ext_resource type="Texture2D" uid="uid://dfuofh4nwer0n" path="res://assets/bird1.png" id="3_qhc6c"]
+[ext_resource type="Texture2D" uid="uid://533ubvnyvpxe" path="res://assets/bird2.png" id="4_knkuh"]
+[ext_resource type="Texture2D" uid="uid://cb3fw6j2c364v" path="res://assets/bird3.png" id="5_yxowy"]
+[ext_resource type="AudioStream" uid="uid://clduaj8knsdts" path="res://assets/sound/explosion.ogg" id="6_0ygfc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m7eb"]
+atlas = ExtResource("2_g3nbg")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_854ck"]
+atlas = ExtResource("2_g3nbg")
+region = Rect2(40, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bcc5"]
+atlas = ExtResource("2_g3nbg")
+region = Rect2(80, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwdgl"]
+atlas = ExtResource("3_qhc6c")
+region = Rect2(0, 0, 51, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emqpu"]
+atlas = ExtResource("4_knkuh")
+region = Rect2(0, 0, 51, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vf24"]
+atlas = ExtResource("5_yxowy")
+region = Rect2(0, 0, 51, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_onqqe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m7eb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_854ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bcc5")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwdgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emqpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vf24")
+}],
+"loop": true,
+"name": &"one",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axq8c"]
+radius = 21.587
+
+[node name="inimigo_1" type="Node2D"]
+script = ExtResource("1_5haim")
+
+[node name="inimigo1" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_onqqe")
+animation = &"one"
+autoplay = "one"
+
+[node name="danotiro" type="Area2D" parent="."]
+
+[node name="tirorecebido" type="CollisionShape2D" parent="danotiro"]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_axq8c")
+
+[node name="somdead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0ygfc")
+
+[connection signal="area_entered" from="danotiro" to="." method="_on_danotiro"]
