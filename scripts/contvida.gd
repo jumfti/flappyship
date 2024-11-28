@@ -9,7 +9,7 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	#Alterando a quantidade das vidas
+	#Alterando a quantidade das vidas (coração)
 	match Controles.vidas:
 		0:
 			vidaicon.hide()

@@ -11,6 +11,7 @@ var lifei: bool = true
 func _ready() -> void:
 	pass
 
+#movimento da nave
 func _process(delta: float) -> void:
 	translate(Vector2(-1,0) * veli * delta)
 

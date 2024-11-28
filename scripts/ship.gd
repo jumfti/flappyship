@@ -40,7 +40,8 @@ func damage(_valordano: int) -> void:
 	pass
 
 #quando inimigo colidir na nave
-func _colisaonave_area_entered(_area: Area2D) -> void:
+func _on_colisaonave_area_entered(_area: Area2D) -> void:
 	Controles.vidas -= 1
-	get_tree().reload_current_scene() 
+	#Para reeiniciar se colidir
+	#get_tree().reload_current_scene() 
 	

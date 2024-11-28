@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dt6cmeybyb7oq"]
+[gd_scene load_steps=17 format=3 uid="uid://dt6cmeybyb7oq"]
 
 [ext_resource type="Script" path="res://scripts/contvida.gd" id="1_3fssq"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_5yes5"]
+[ext_resource type="Script" path="res://scripts/mainzerado.gd" id="1_vnk7s"]
 [ext_resource type="FontFile" uid="uid://crko3d01veblg" path="res://assets/font/visitor1.ttf" id="1_x6puo"]
 [ext_resource type="Texture2D" uid="uid://crf0xvt0e5rcj" path="res://Ship5/Exhaust/Normal_flight/Exhaust1/exhaust04.png" id="2_askv7"]
 [ext_resource type="Texture2D" uid="uid://dee8r07efg2gj" path="res://assets/ground2.png" id="3_fsf12"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cum5khv3jtce1" path="res://assets/ground.png" id="4_i7l3u"]
 [ext_resource type="Script" path="res://scripts/inimigoauto.gd" id="5_lswm1"]
 [ext_resource type="PackedScene" uid="uid://cnl6qad5cys5y" path="res://scenes/nave.tscn" id="8_7to3i"]
+[ext_resource type="Script" path="res://scripts/topos.gd" id="11_e8l1b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_n4weu"]
 line_spacing = 1.0
@@ -24,6 +26,7 @@ size = Vector2(118, 71)
 
 [node name="main" type="Node2D"]
 position = Vector2(0, -1)
+script = ExtResource("1_vnk7s")
 
 [node name="info" type="CanvasLayer" parent="."]
 
@@ -104,25 +107,27 @@ stream = ExtResource("3_jf6sy")
 position = Vector2(-85, -3)
 shape = SubResource("RectangleShape2D_b1ogl")
 
-[node name="topoc" type="TextureRect" parent="."]
-offset_top = -109.0
-offset_right = 1728.0
-offset_bottom = 59.0
-texture = ExtResource("3_fsf12")
-
-[node name="topob" type="TextureRect" parent="topoc"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 700.0
-offset_right = 1727.0
-offset_bottom = 868.0
-texture = ExtResource("4_i7l3u")
-
 [node name="inimigoauto" type="Node2D" parent="."]
 script = ExtResource("5_lswm1")
 
 [node name="Timer" type="Timer" parent="inimigoauto"]
 one_shot = true
 
-[connection signal="area_entered" from="ship/colisaonave" to="info/vida" method="_colisaonave_area_entered"]
+[node name="topos" type="ParallaxBackground" parent="."]
+layer = 0
+scroll_offset = Vector2(25, 0)
+script = ExtResource("11_e8l1b")
+
+[node name="topocb" type="ParallaxLayer" parent="topos"]
+motion_mirroring = Vector2(1728, 0)
+
+[node name="topob" type="Sprite2D" parent="topos/topocb"]
+position = Vector2(863, 678)
+texture = ExtResource("4_i7l3u")
+
+[node name="topoc" type="Sprite2D" parent="topos/topocb"]
+position = Vector2(864, -25)
+texture = ExtResource("3_fsf12")
+
+[connection signal="area_entered" from="ship/colisaonave" to="ship" method="_on_colisaonave_area_entered"]
 [connection signal="timeout" from="inimigoauto/Timer" to="inimigoauto" method="_on_timer_timeout"]

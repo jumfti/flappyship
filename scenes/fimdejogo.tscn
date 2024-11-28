@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxhhgshbltlis"]
+
+[ext_resource type="Script" path="res://scripts/fimdejogo.gd" id="1_b2odw"]
+[ext_resource type="FontFile" uid="uid://crko3d01veblg" path="res://assets/font/visitor1.ttf" id="1_dcv67"]
+[ext_resource type="Texture2D" uid="uid://do8pbc3jfvyhf" path="res://Ship5/Ship5.png" id="2_oqn5y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_usydh"]
+font = ExtResource("1_dcv67")
+font_size = 130
+font_color = Color(0, 0, 0.0235294, 0.760784)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t55sk"]
+font = ExtResource("1_dcv67")
+font_size = 120
+font_color = Color(0, 0, 0.0235294, 0.760784)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kakqf"]
+font = ExtResource("1_dcv67")
+font_size = 90
+font_color = Color(0, 0, 0.0235294, 0.760784)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yya60"]
+font = ExtResource("1_dcv67")
+font_size = 90
+font_color = Color(0, 0, 0.0235294, 0.760784)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fc66y"]
+font = ExtResource("1_dcv67")
+font_size = 60
+font_color = Color(0, 0, 0.0235294, 0.760784)
+
+[node name="fimdejogo" type="Node2D"]
+script = ExtResource("1_b2odw")
+
+[node name="fundo" type="ColorRect" parent="."]
+offset_right = 1163.0
+offset_bottom = 655.0
+color = Color(0.6, 1, 1, 1)
+
+[node name="fim" type="Label" parent="fundo"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 1153.0
+offset_bottom = 133.0
+text = "FIM DE JOGO"
+label_settings = SubResource("LabelSettings_usydh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="recordefim" type="Label" parent="fundo"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 188.0
+offset_right = 1162.0
+offset_bottom = 323.0
+text = "12345"
+label_settings = SubResource("LabelSettings_t55sk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pontoatual" type="Label" parent="fundo"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 412.0
+offset_right = 1154.0
+offset_bottom = 547.0
+text = "12345"
+label_settings = SubResource("LabelSettings_t55sk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="recorde" type="Label" parent="fundo"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 132.0
+offset_right = 1151.0
+offset_bottom = 213.0
+text = "RECORDE:"
+label_settings = SubResource("LabelSettings_kakqf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pontuacao" type="Label" parent="fundo"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 355.0
+offset_right = 1152.0
+offset_bottom = 436.0
+text = "PONTUACAO ATUAL:"
+label_settings = SubResource("LabelSettings_yya60")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="voltar" type="Label" parent="fundo"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 560.0
+offset_right = 1150.0
+offset_bottom = 641.0
+text = "Aperte \"j\" para voltar ao menu"
+label_settings = SubResource("LabelSettings_fc66y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="mostrarnave" type="Sprite2D" parent="."]
+
+[node name="nave1" type="Sprite2D" parent="."]
+position = Vector2(296, 252)
+texture = ExtResource("2_oqn5y")
+
+[node name="nave2" type="Sprite2D" parent="."]
+position = Vector2(296, 473)
+texture = ExtResource("2_oqn5y")
