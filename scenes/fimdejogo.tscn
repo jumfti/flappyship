@@ -26,7 +26,7 @@ font_color = Color(0, 0, 0.0235294, 0.760784)
 
 [sub_resource type="LabelSettings" id="LabelSettings_fc66y"]
 font = ExtResource("1_dcv67")
-font_size = 60
+font_size = 50
 font_color = Color(0, 0, 0.0235294, 0.760784)
 
 [node name="fimdejogo" type="Node2D"]
@@ -98,7 +98,7 @@ offset_left = -1.0
 offset_top = 560.0
 offset_right = 1150.0
 offset_bottom = 641.0
-text = "Aperte \"j\" para voltar ao menu"
+text = "Aperte \"ESPAÇO\" para voltar ao menu"
 label_settings = SubResource("LabelSettings_fc66y")
 horizontal_alignment = 1
 vertical_alignment = 1
